@@ -1,0 +1,22 @@
+curl --request POST \
+  --url https://us-west-2.recall.ai/api/v1/bot/ \
+  --header 'Authorization: 821fb25e3be9f4178ac4f904f3032e4379b96e5d' \
+  --header 'accept: application/json' \
+  --header 'content-type: application/json' \
+  --data '{
+    "meeting_url": "https://us04web.zoom.us/j/3625835749?pwd=GbA8i7E6XUhJUAr3APEe6amaiuXFLs.1",
+    "bot_name": "LaLa Lab Buddy",
+    "output_media": {
+      "camera": {
+        "kind": "webpage",
+        "config": {
+          "url": "https://recallai-demo.netlify.app?wss=wss://archegoniate-computably-fleta.ngrok-free.dev"
+        }
+      }
+    },
+    "variant": {
+      "zoom": "web_4_core",
+      "google_meet": "web_4_core",
+      "microsoft_teams": "web_4_core"
+    }
+  }'

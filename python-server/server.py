@@ -51,12 +51,6 @@ async def connect_to_openai():
                     "output_audio_format": "pcm16",
                     "modalities": ["text", "audio"],
                     "voice": "alloy",
-                    "turn_detection": {
-                        "type": "semantic_vad",
-                        "eagerness": "low",
-                        "create_response": True,
-                        "interrupt_response": True,
-                    },
                 },
             }
             await ws.send(json.dumps(update_session))

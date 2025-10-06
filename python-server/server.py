@@ -22,7 +22,8 @@ if not OPENAI_API_KEY:
 
 async def connect_to_openai():
     """Connect to OpenAI's WebSocket endpoint."""
-    uri = "wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview-2024-12-17"
+    uri = "wss://api.openai.com/v1/realtime?model=gpt-realtime"
+    # uri = "wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview-2024-12-17"
 
     try:
         ws = await connect(
@@ -51,10 +52,8 @@ async def connect_to_openai():
                     "modalities": ["text", "audio"],
                     "voice": "alloy",
                     "turn_detection": {
-                        "type": "server_vad",
-                        "threshold": 0.5,
-                        "prefix_padding_ms": 5000,
-                        "silence_duration_ms": 3000,
+                        "type": "semantic_vad",
+                        "eagerness": "low",
                         "create_response": True,
                         "interrupt_response": True,
                     },

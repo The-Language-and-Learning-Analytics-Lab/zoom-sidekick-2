@@ -10,7 +10,7 @@ curl --request POST \
       "camera": {
         "kind": "webpage",
         "config": {
-          "url": "https://recallai-demo.netlify.app?wss=wss://archegoniate-computably-fleta.ngrok-free.dev"
+          "url": "https://archegoniate-computably-fleta.ngrok-free.dev/?wss=wss://archegoniate-computably-fleta.ngrok-free.dev"
         }
       }
     },

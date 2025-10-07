@@ -50,7 +50,7 @@ async def connect_to_openai():
                     "input_audio_format": "pcm16",
                     "output_audio_format": "pcm16",
                     "modalities": ["text", "audio"],
-                    "voice": "alloy",
+                    "voice": "ballad",
                 },
             }
             await ws.send(json.dumps(update_session))

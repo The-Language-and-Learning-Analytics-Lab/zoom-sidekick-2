@@ -65,13 +65,13 @@ export function App() {
         },
       ]);
 
-      // Always use VAD mode
-      client.updateSession({
-        turn_detection: { 
-          type: "server_vad",
-        },
-        voice: "ballad", // or whatever voice you want
-      });
+      // VAD settings are now controlled by the server
+      // client.updateSession({
+      //   turn_detection: { 
+      //     type: "server_vad",
+      //   },
+      //   voice: "echo", // or whatever voice you want
+      // });
 
       // Check if we're already recording before trying to pause
       if (wavRecorder.recording) {

@@ -119,7 +119,7 @@ The bot will join your meeting URL and stream the demo webpage's content directl
 
 If you'd like to customize the webpage shown by the bot, or change the interaction with the OpenAI agent, follow the complete setup instructions below.
 
-## Customizing the Webpage
+## Running Our Own Client
 
 ### Local Development Setup
 
@@ -130,7 +130,52 @@ cd client
 npm run dev
 ```
 
-The client will be available at `http://localhost:5173`.
+The client will be available at `http://localhost:5173`. Next, use ngrok to tunnel the locally hosted client to the internet. Assuming you have only one ngrok account, ngrok will give you only one url to be used for tunneling. This means that both the client and the server will have to share the same URL. When activating the client AND the server, you will:
+
+(1) Start the client using
+```bash
+cd client
+npm run dev
+```
+(2) Start the server using
+```bash
+cd python-server
+source venv/bin/activate
+python server.py
+```
+(3) Call ngrok to expose the server (note that the pooling enabled option is what lets us use the same ngrok url for both client and server)
+```bash
+ngrok http 3000 --pooling-enabled
+```
+(4) Call ngrok to expose the client
+```bash
+ngrok http 5173 --pooling-enabled
+```
+(5) Send the CURL request. Note that in the URL section, we are using the "YOUR_NGROK_URL" twice. Yes, the same one; it looks funky but it works.
+```bash
+curl --request POST \
+  --url https://us-east-1.recall.ai/api/v1/bot/ \
+  --header 'Authorization: YOUR_RECALL_TOKEN' \
+  --header 'accept: application/json' \
+  --header 'content-type: application/json' \
+  --data '{
+    "meeting_url": "YOUR_MEETING_URL",
+    "bot_name": "Recall.ai Notetaker",
+    "output_media": {
+      "camera": {
+        "kind": "webpage",
+        "config": {
+          "url": "YOUR_NGROK_URL?wss=wss://YOUR_NGROK_URL"
+        }
+      }
+    },
+    "variant": {
+      "zoom": "web_4_core",
+      "google_meet": "web_4_core",
+      "microsoft_teams": "web_4_core"
+    }
+  }'
+```
 
 ### Modifying the Agent
 

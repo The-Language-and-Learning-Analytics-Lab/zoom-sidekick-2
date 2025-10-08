@@ -19,4 +19,4 @@ curl --request POST \
       "google_meet": "web_4_core",
       "microsoft_teams": "web_4_core"
     }
-  }'
+}'

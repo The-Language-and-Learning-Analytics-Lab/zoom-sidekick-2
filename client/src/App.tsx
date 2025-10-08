@@ -65,13 +65,16 @@ export function App() {
         },
       ]);
 
-      // VAD settings are now controlled by the server
-      // client.updateSession({
-      //   turn_detection: { 
-      //     type: "server_vad",
-      //   },
-      //   voice: "echo", // or whatever voice you want
-      // });
+
+      client.updateSession({
+        turn_detection: { 
+          type: "server_vad",
+          "threshold": 0.5,
+          "prefix_padding_ms": 600,
+          "silence_duration_ms": 1000,
+        },
+        voice: "ballad", // or whatever voice you want
+      });
 
       // Check if we're already recording before trying to pause
       if (wavRecorder.recording) {
